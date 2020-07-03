@@ -1,5 +1,6 @@
 """Clemson dataset"""
 
+from collections import Counter
 import csv
 import os
 import datetime as dt
@@ -207,6 +208,9 @@ class Dataset():
     # Class names
     self.names_1, self.names_2, self.names_3, self.names_4, self.names_5, self.names_6 = \
       self.__class_names()
+    # Class counters
+    self.counts_1, self.counts_2, self.counts_3, self.counts_4, self.counts_5, self.counts_6 = \
+      Counter(), Counter(), Counter(), Counter(), Counter(), Counter()
 
   def __class_names(self):
     """Get class names from label master file"""
@@ -227,6 +231,12 @@ class Dataset():
     for tag in categories[5]:
       names_6.append(tag.attrib['name'])
     return names_1, names_2, names_3, names_4, names_5, names_6
+
+  def __add_to_class_counts(self, class_counts, labels):
+    """Add increment to class counts"""
+    unique, counts = np.unique(labels, return_counts=True)
+    new_class_counts = Counter(dict(zip(unique, counts)))
+    return class_counts + new_class_counts
 
   def __get_food_class(self, food):
     if food in DESSERTS_FOODS:
@@ -390,7 +400,13 @@ class Dataset():
         labels_5[start_frame:end_frame] = l5
       if l6 in self.names_6:
         labels_6[start_frame:end_frame] = l6
-
+    # Update class names
+    self.counts_1 = self.__add_to_class_counts(self.counts_1, labels_1)
+    self.counts_2 = self.__add_to_class_counts(self.counts_2, labels_2)
+    self.counts_3 = self.__add_to_class_counts(self.counts_3, labels_3)
+    self.counts_4 = self.__add_to_class_counts(self.counts_4, labels_4)
+    self.counts_5 = self.__add_to_class_counts(self.counts_5, labels_5)
+    self.counts_6 = self.__add_to_class_counts(self.counts_6, labels_6)
     return (labels_1, labels_2, labels_3, labels_4, labels_5, labels_6)
 
   def write(self, path, id, timestamps, data, dominant_hand, labels):
@@ -436,6 +452,15 @@ class Dataset():
 
   def done(self):
     logging.info("Done")
+    if not (self.counts_1[DEFAULT_LABEL] == self.counts_2[DEFAULT_LABEL] == self.counts_3[DEFAULT_LABEL] == self.counts_4[DEFAULT_LABEL] == self.counts_5[DEFAULT_LABEL] == self.counts_6[DEFAULT_LABEL]):
+      logging.warning("Idle counts are not equal for all classes. " +
+        "Please check label spec and/or label files.")
+    logging.info("Final number of frames for category 1: {0}.".format(self.counts_1))
+    logging.info("Final number of frames for category 2: {0}.".format(self.counts_2))
+    logging.info("Final number of frames for category 3: {0}.".format(self.counts_3))
+    logging.info("Final number of frames for category 4: {0}.".format(self.counts_4))
+    logging.info("Final number of frames for category 5: {0}.".format(self.counts_5))
+    logging.info("Final number of frames for category 6: {0}.".format(self.counts_6))
 
   def get_flip_signs(self):
     return FLIP_ACC, FLIP_GYRO

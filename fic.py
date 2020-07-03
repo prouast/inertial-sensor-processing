@@ -1,5 +1,6 @@
 """FIC dataset"""
 
+from collections import Counter
 import pickle
 import csv
 import os
@@ -44,6 +45,14 @@ class Dataset():
       raise RunimeError('Pickle file not found')
     with open(pickle_path, 'rb') as f:
       self._data = pickle.load(f)
+    # Class counters
+    self.counts_1 = Counter()
+
+  def __add_to_class_counts(self, class_counts, labels):
+    """Add increment to class counts"""
+    unique, counts = np.unique(labels, return_counts=True)
+    new_class_counts = Counter(dict(zip(unique, counts)))
+    return class_counts + new_class_counts
 
   def ids(self):
     return [(self._data['subject_id'][i], self._data['session_id'][i]) \
@@ -70,6 +79,8 @@ class Dataset():
       start_frame = np.argmax(np.array(timestamps) >= start_time)
       end_frame = np.argmax(np.array(timestamps) > end_time)
       labels_1[start_frame:end_frame] = "Intake"
+    # Update class names
+    self.counts_1 = self.__add_to_class_counts(self.counts_1, labels_1)
     return list(labels_1)
 
   def dominant(self, id):
@@ -111,6 +122,7 @@ class Dataset():
 
   def done(self):
     logging.info("Done")
+    logging.info("Final number of frames for category 1: {0}.".format(self.counts_1))
 
   def get_flip_signs(self):
     return FLIP_ACC, FLIP_GYRO
