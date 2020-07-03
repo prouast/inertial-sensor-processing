@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<categories>
+	<category id="0" name="Main">
+		<tag id="0" name="idle"/>
+		<tag id="1" name="intake"/>
+	</category>	
+	<category id="1" name="Sub">
+		<tag id="0" name="idle"/>
+		<tag id="1" name="bite"/>
+		<tag id="2" name="drink"/>
+	</category>	
+	<category id="2" name="Hand">
+		<tag id="0" name="idle"/>
+		<tag id="1" name="left"/>
+		<tag id="2" name="right"/>
+		<tag id="3" name="both"/>
+	</category>
+	<category id="3" name="Utensil">
+		<tag id="0" name="Idle"/>
+		<tag id="1" name="chopsticks"/>
+		<tag id="2" name="fork"/>
+		<tag id="3" name="hand"/>
+		<tag id="4" name="knife"/>
+		<tag id="5" name="spoon"/>
+	</category>
+	<category id="4" name="Container">
+		<tag id="0" name="Idle"/>
+		<tag id="1" name="bowl"/>
+		<tag id="2" name="glass"/>
+		<tag id="3" name="mug"/>
+		<tag id="4" name="plate"/>
+	</category>
+	<category id="5" name="Food">
+		<tag id="0" name="Idle"/>
+		<tag id="1" name="dessert"/>
+		<tag id="2" name="drink"/>
+		<tag id="3" name="fruit_veg"/>
+		<tag id="4" name="meat_dish"/>
+		<tag id="5" name="pizza"/>
+		<tag id="6" name="rice_dish"/>
+		<tag id="7" name="salad"/>
+		<tag id="8" name="sandwich_wrap"/>
+		<tag id="9" name="snack"/>
+		<tag id="10" name="soup_stew"/>
+		<tag id="11" name="veg_dish"/>
+	</category>
+</categories>

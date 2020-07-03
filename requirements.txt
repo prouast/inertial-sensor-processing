@@ -1,0 +1,7 @@
+numpy
+pygame
+numpy-quaternion
+xlrd
+scipy
+tensorflow
+matplotlib
