@@ -31,7 +31,7 @@ The following flags can be used to specify the settings:
 
 | Argument | Description | Default |
 | --- | --- | --- |
-| --src_dir | Directory to search for data | OREBA-DIS |
+| --src_dir | Recordings directory | OREBA_Dataset_Public_1_0/oreba_dis/recordings |
 | --exp_dir | Directory for data export | Export |
 | --dataset | Which dataset is used {OREBA-DIS, OREBA-SHA, Clemson, or FIC} | OREBA-DIS |
 | --sampling_rate | Sampling rate of exported signals in Hz | 64 |
@@ -45,7 +45,7 @@ The following flags can be used to specify the settings:
 | --exp_mode | Write file for publication or development {pub, dev} | dev |
 | --exp_uniform | Convert all dominant hands to right and all non-dominant hands to left | True |
 | --exp_format | Format for export {csv, tfrecord} | csv |
-| --label_spec | Filename of label specification within src_dir | labels.xml |
+| --label_spec | Filename of label specification | label_spec/OREBA_only_intake.xml |
 | --label_spec_inherit | Inherit label specification for sublabels (if label not included, always keep sublabels as Idle) | True |
 | --dom_hand_spec | Filename containing the dominant hand info | dominant_hand.csv |
 | --organise_data | If True, organise data in train, valid, test subfolders | False |

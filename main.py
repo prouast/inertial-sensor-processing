@@ -345,7 +345,7 @@ def str2bool(v):
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser(description='Process inertial sensor data')
-  parser.add_argument('--src_dir', type=str, default='OREBA-DIS', nargs='?', help='Directory to search for data')
+  parser.add_argument('--src_dir', type=str, default='OREBA_Dataset_Public_1_0/oreba_dis/recordings', nargs='?', help='Recordings directory')
   parser.add_argument('--exp_dir', type=str, default='Export', nargs='?', help='Directory for data export')
   parser.add_argument('--dataset', choices=('OREBA-DIS', 'OREBA-SHA', 'Clemson', 'FIC'), default='OREBA-DIS', nargs='?', help='Which dataset is used')
   parser.add_argument('--sampling_rate', type=int, default=64, nargs='?', help='Sampling rate of exported signals in Hz')
